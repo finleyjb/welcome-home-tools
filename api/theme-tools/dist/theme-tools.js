@@ -720,4 +720,4 @@ function Ne(e, t) {
 	return n;
 }
 //#endregion
-export { Me as createTheme, je as setCurrentThemeName, Ae as subscribeCurrentTheme };
+export { Me as createThemes, je as setCurrentThemeName, Ae as subscribeCurrentTheme };

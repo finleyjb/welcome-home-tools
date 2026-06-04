@@ -45,7 +45,10 @@ export function setCurrentThemeName(themeName: string) {
   _getStore().$currentThemeName.set(themeName);
 }
 
-export function createTheme(currentThemeName: string, themes: Theme | Theme[]) {
+export function createThemes(
+  currentThemeName: string,
+  themes: Theme | Theme[],
+) {
   if (!Array.isArray(themes)) {
     themes = [themes];
   }

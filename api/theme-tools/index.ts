@@ -1,5 +1,5 @@
 export {
-  createTheme,
+  createThemes,
   setCurrentThemeName,
   subscribeCurrentTheme,
 } from './src/theme-store.ts';

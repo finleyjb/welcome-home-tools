@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import {
   _resetStore,
-  createTheme,
+  createThemes,
   setCurrentThemeName,
   subscribeCurrentTheme,
 } from './theme-store';
@@ -19,14 +19,14 @@ afterEach(() => {
 
 describe('Theme store', () => {
   test('can set theme once', async () => {
-    createTheme('non-default', [
+    createThemes('non-default', [
       { name: 'default', styleTitle: 'default' },
       { name: 'non-default', styleTitle: 'non-default' },
     ]);
   });
 
   test('can repeatedly set theme', () => {
-    createTheme('default', [
+    createThemes('default', [
       { name: 'default', styleTitle: 'default' },
       { name: 'theme1', styleTitle: 'theme1' },
       { name: 'theme2', styleTitle: 'theme2' },
