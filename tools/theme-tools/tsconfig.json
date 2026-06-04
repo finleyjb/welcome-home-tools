@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "stripInternal": true,
     "module": "es2022",
     "target": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ES6"],
@@ -17,10 +16,7 @@
     "noEmit": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "sourceMap": true
   },
   "exclude": ["node_modules", "**/dist", "**/build"]
 }
