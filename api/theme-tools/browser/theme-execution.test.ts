@@ -2,7 +2,6 @@ import { afterEach, describe, expect, test } from 'vitest';
 import { _listenForThemeChange } from '../src/theme-execution';
 
 afterEach(() => {
-  // Work around test isolation not working
   document.head.innerHTML = '';
 });
 
