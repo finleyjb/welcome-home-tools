@@ -3,7 +3,9 @@ import type { Theme } from './types';
 export function _listenForThemeChange(currentTheme: Theme) {
   if (
     currentTheme.styleUrl &&
-    !document.querySelector(`link[href="${currentTheme.styleUrl}"]`)
+    !document.querySelector(
+      `link[rel="stylesheet"][href="${currentTheme.styleUrl}"]`,
+    )
   ) {
     const link = document.createElement('link');
     link.href = currentTheme.styleUrl;

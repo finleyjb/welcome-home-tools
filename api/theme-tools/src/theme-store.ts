@@ -1,5 +1,6 @@
 import { atom, computed } from 'nanostores';
 import { ThemeToolsError } from './exception.ts';
+import { _prefetchLinks } from './prefetch.ts';
 import { _listenForThemeChange } from './theme-execution.ts';
 import { type Theme, type ThemeDict, ThemeDictSchema } from './types.ts';
 
@@ -59,6 +60,8 @@ export function createThemes(currentThemeName: string, themes: ThemeDict) {
   const validatedThemes = validateThemes(currentThemeName, themes);
 
   store = new ThemeStore(currentThemeName, validatedThemes);
+
+  _prefetchLinks(currentThemeName, themes.themes);
 }
 
 function validateThemes(themeName: string, themes: ThemeDict): ThemeDict {

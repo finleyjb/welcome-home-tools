@@ -6,6 +6,7 @@ export const ThemeSchema = z.readonly(
     styleTitle: z.string(),
     styleUrl: z.optional(z.httpUrl({ normalize: true })),
     pageUrl: z.optional(z.array(z.httpUrl({ normalize: true }))),
+    preloadStrategy: z.optional(z.enum(['preload', 'prefetch'])),
   }),
 );
 

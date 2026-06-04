@@ -4,6 +4,10 @@ vi.mock(import('./theme-execution.ts'), () => ({
   _listenForThemeChange: vi.fn(),
 }));
 
+vi.mock(import('./prefetch.ts'), () => ({
+  _prefetchLinks: vi.fn(),
+}));
+
 import { _listenForThemeChange } from './theme-execution.ts';
 import {
   _resetStore,
