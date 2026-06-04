@@ -220,21 +220,21 @@ importers:
   api/theme-tools:
     dependencies:
       nanostores:
-        specifier: github:nanostores/nanostores
-        version: https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48
+        specifier: ^1.3.0
+        version: 1.3.0
     devDependencies:
       '@vitest/browser-playwright':
         specifier: ^4.1.8
-        version: 4.1.8(playwright@1.60.0)(vite@8.0.16)(vitest@4.1.8)
+        version: 4.1.8(playwright@1.60.0)(vite@8.0.16(yaml@2.9.0))(vitest@4.1.8)
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
       vite:
         specifier: ^8.0.16
-        version: 8.0.16
+        version: 8.0.16(yaml@2.9.0)
       vitest:
         specifier: ^4.1.8
-        version: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16)
+        version: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16(yaml@2.9.0))
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -668,9 +668,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanostores@https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48}
-    version: 1.3.0
+  nanostores@1.3.0:
+    resolution: {integrity: sha512-XPUa/jz+P1oJvN9VBxw4L9MtdFfaH3DAryqPssqhb2kXjmb9npz0dly6rCsgFWOPr4Yg9mTfM3MDZgZZ+7A3lA==}
     engines: {node: ^20.0.0 || >=22.0.0}
 
   obug@2.1.1:
@@ -1044,29 +1043,29 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
-  '@vitest/browser-playwright@4.1.8(playwright@1.60.0)(vite@8.0.16)(vitest@4.1.8)':
+  '@vitest/browser-playwright@4.1.8(playwright@1.60.0)(vite@8.0.16(yaml@2.9.0))(vitest@4.1.8)':
     dependencies:
-      '@vitest/browser': 4.1.8(vite@8.0.16)(vitest@4.1.8)
-      '@vitest/mocker': 4.1.8(vite@8.0.16)
+      '@vitest/browser': 4.1.8(vite@8.0.16(yaml@2.9.0))(vitest@4.1.8)
+      '@vitest/mocker': 4.1.8(vite@8.0.16(yaml@2.9.0))
       playwright: 1.60.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16)
+      vitest: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16(yaml@2.9.0))
     transitivePeerDependencies:
       - bufferutil
       - msw
       - utf-8-validate
       - vite
 
-  '@vitest/browser@4.1.8(vite@8.0.16)(vitest@4.1.8)':
+  '@vitest/browser@4.1.8(vite@8.0.16(yaml@2.9.0))(vitest@4.1.8)':
     dependencies:
       '@blazediff/core': 1.9.1
-      '@vitest/mocker': 4.1.8(vite@8.0.16)
+      '@vitest/mocker': 4.1.8(vite@8.0.16(yaml@2.9.0))
       '@vitest/utils': 4.1.8
       magic-string: 0.30.21
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16)
+      vitest: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16(yaml@2.9.0))
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
@@ -1083,13 +1082,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.8(vite@8.0.16)':
+  '@vitest/mocker@4.1.8(vite@8.0.16(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.8
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.16
+      vite: 8.0.16(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.8':
     dependencies:
@@ -1256,7 +1255,7 @@ snapshots:
 
   nanoid@3.3.12: {}
 
-  nanostores@https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48: {}
+  nanostores@1.3.0: {}
 
   obug@2.1.1: {}
 
@@ -1375,7 +1374,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  vite@8.0.16:
+  vite@8.0.16(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -1384,11 +1383,12 @@ snapshots:
       tinyglobby: 0.2.17
     optionalDependencies:
       fsevents: 2.3.3
+      yaml: 2.9.0
 
-  vitest@4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16):
+  vitest@4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.8
-      '@vitest/mocker': 4.1.8(vite@8.0.16)
+      '@vitest/mocker': 4.1.8(vite@8.0.16(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.8
       '@vitest/runner': 4.1.8
       '@vitest/snapshot': 4.1.8
@@ -1405,10 +1405,10 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 8.0.16
+      vite: 8.0.16(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@vitest/browser-playwright': 4.1.8(playwright@1.60.0)(vite@8.0.16)(vitest@4.1.8)
+      '@vitest/browser-playwright': 4.1.8(playwright@1.60.0)(vite@8.0.16(yaml@2.9.0))(vitest@4.1.8)
     transitivePeerDependencies:
       - msw
 
