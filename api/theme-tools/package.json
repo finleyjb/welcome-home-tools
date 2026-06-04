@@ -13,7 +13,6 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@preact/preset-vite": "^2.10.5",
     "@vitest/browser-playwright": "^4.1.8",
     "jsdom": "^29.1.1",
     "tsup": "^8.5.1",
@@ -23,9 +22,7 @@
     "zod": "^4.4.3"
   },
   "dependencies": {
-    "nanostores": "github:nanostores/nanostores",
-    "preact": "^10.29.2",
-    "preact-custom-element": "^4.6.0"
+    "nanostores": "github:nanostores/nanostores"
   },
   "peerDependencies": {
     "zod": "^4.4.3"
