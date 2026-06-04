@@ -75,22 +75,22 @@ function u(e, t, n) {
 	});
 }
 var d = "captureStackTrace" in Error ? Error.captureStackTrace : (...e) => {};
-function f(e) {
+function ee(e) {
 	return typeof e == "object" && !!e && !Array.isArray(e);
 }
-var p = /* @__PURE__ */ new Set([
+var f = /* @__PURE__ */ new Set([
 	"string",
 	"number",
 	"symbol"
 ]);
-function ee(e) {
+function te(e) {
 	return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-function te(e, t, n) {
+function ne(e, t, n) {
 	let r = new e._zod.constr(t ?? e._zod.def);
 	return (!t || n?.parent) && (r._zod.parent = e), r;
 }
-function m(e) {
+function p(e) {
 	let t = e;
 	if (!t) return {};
 	if (typeof t == "string") return { error: () => t };
@@ -103,36 +103,36 @@ function m(e) {
 		error: () => t.error
 	} : t;
 }
-function h(e) {
+function m(e) {
 	return Object.keys(e).filter((t) => e[t]._zod.optin === "optional" && e[t]._zod.optout === "optional");
 }
 -Number.MAX_VALUE, Number.MAX_VALUE;
-function g(e, t = 0) {
+function h(e, t = 0) {
 	if (e.aborted === !0) return !0;
 	for (let n = t; n < e.issues.length; n++) if (e.issues[n]?.continue !== !0) return !0;
 	return !1;
 }
-function ne(e, t = 0) {
+function re(e, t = 0) {
 	if (e.aborted === !0) return !0;
 	for (let n = t; n < e.issues.length; n++) if (e.issues[n]?.continue === !1) return !0;
 	return !1;
 }
-function _(e, t) {
+function g(e, t) {
 	return t.map((t) => {
 		var n;
 		return (n = t).path ?? (n.path = []), t.path.unshift(e), t;
 	});
 }
-function v(e) {
+function _(e) {
 	return typeof e == "string" ? e : e?.message;
 }
-function y(e, t, n) {
-	let r = e.message ? e.message : v(e.inst?._zod.def?.error?.(e)) ?? v(t?.error?.(e)) ?? v(n.customError?.(e)) ?? v(n.localeError?.(e)) ?? "Invalid input", { inst: i, continue: a, input: o, ...s } = e;
+function v(e, t, n) {
+	let r = e.message ? e.message : _(e.inst?._zod.def?.error?.(e)) ?? _(t?.error?.(e)) ?? _(n.customError?.(e)) ?? _(n.localeError?.(e)) ?? "Invalid input", { inst: i, continue: a, input: o, ...s } = e;
 	return s.path ??= [], s.message = r, t?.reportInput && (s.input = o), s;
 }
 //#endregion
 //#region ../../node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/errors.js
-var b = (e, t) => {
+var y = (e, t) => {
 	e.name = "$ZodError", Object.defineProperty(e, "_zod", {
 		value: e._zod,
 		enumerable: !1
@@ -143,7 +143,7 @@ var b = (e, t) => {
 		value: () => e.message,
 		enumerable: !1
 	});
-}, x = t("$ZodError", b), S = t("$ZodError", b, { Parent: Error }), C = /* @__PURE__ */ ((e) => (t, r, a, o) => {
+}, b = t("$ZodError", y), x = t("$ZodError", y, { Parent: Error }), S = /* @__PURE__ */ ((e) => (t, r, a, o) => {
 	let s = a ? {
 		...a,
 		async: !1
@@ -153,11 +153,11 @@ var b = (e, t) => {
 	}, s);
 	if (c instanceof Promise) throw new n();
 	if (c.issues.length) {
-		let t = new (o?.Err ?? e)(c.issues.map((e) => y(e, s, i())));
+		let t = new (o?.Err ?? e)(c.issues.map((e) => v(e, s, i())));
 		throw d(t, o?.callee), t;
 	}
 	return c.value;
-})(S), w = /* @__PURE__ */ ((e) => async (t, n, r, a) => {
+})(x), C = /* @__PURE__ */ ((e) => async (t, n, r, a) => {
 	let o = r ? {
 		...r,
 		async: !0
@@ -166,11 +166,11 @@ var b = (e, t) => {
 		issues: []
 	}, o);
 	if (s instanceof Promise && (s = await s), s.issues.length) {
-		let t = new (a?.Err ?? e)(s.issues.map((e) => y(e, o, i())));
+		let t = new (a?.Err ?? e)(s.issues.map((e) => v(e, o, i())));
 		throw d(t, a?.callee), t;
 	}
 	return s.value;
-})(S), T = /* @__PURE__ */ ((e) => (t, r, a) => {
+})(x), w = /* @__PURE__ */ ((e) => (t, r, a) => {
 	let o = a ? {
 		...a,
 		async: !1
@@ -181,12 +181,12 @@ var b = (e, t) => {
 	if (s instanceof Promise) throw new n();
 	return s.issues.length ? {
 		success: !1,
-		error: new (e ?? x)(s.issues.map((e) => y(e, o, i())))
+		error: new (e ?? b)(s.issues.map((e) => v(e, o, i())))
 	} : {
 		success: !0,
 		data: s.value
 	};
-})(S), E = /* @__PURE__ */ ((e) => async (t, n, r) => {
+})(x), T = /* @__PURE__ */ ((e) => async (t, n, r) => {
 	let a = r ? {
 		...r,
 		async: !0
@@ -196,20 +196,20 @@ var b = (e, t) => {
 	}, a);
 	return o instanceof Promise && (o = await o), o.issues.length ? {
 		success: !1,
-		error: new e(o.issues.map((e) => y(e, a, i())))
+		error: new e(o.issues.map((e) => v(e, a, i())))
 	} : {
 		success: !0,
 		data: o.value
 	};
-})(S), re = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/, D = /^https?$/, ie = (e) => {
+})(x), ie = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/, E = /^https?$/, ae = (e) => {
 	let t = e ? `[\\s\\S]{${e?.minimum ?? 0},${e?.maximum ?? ""}}` : "[\\s\\S]*";
 	return RegExp(`^${t}$`);
-}, ae = /^(?:true|false)$/i, oe = /* @__PURE__ */ t("$ZodCheck", (e, t) => {
+}, oe = /^(?:true|false)$/i, se = /* @__PURE__ */ t("$ZodCheck", (e, t) => {
 	var n;
 	e._zod ??= {}, e._zod.def = t, (n = e._zod).onattach ?? (n.onattach = []);
-}), se = /* @__PURE__ */ t("$ZodCheckStringFormat", (e, t) => {
+}), ce = /* @__PURE__ */ t("$ZodCheckStringFormat", (e, t) => {
 	var n, r;
-	oe.init(e, t), e._zod.onattach.push((e) => {
+	se.init(e, t), e._zod.onattach.push((e) => {
 		let n = e._zod.bag;
 		n.format = t.format, t.pattern && (n.patterns ??= /* @__PURE__ */ new Set(), n.patterns.add(t.pattern));
 	}), t.pattern ? (n = e._zod).check ?? (n.check = (n) => {
@@ -223,13 +223,13 @@ var b = (e, t) => {
 			continue: !t.abort
 		});
 	}) : (r = e._zod).check ?? (r.check = () => {});
-}), ce = {
+}), le = {
 	major: 4,
 	minor: 4,
 	patch: 3
-}, O = /* @__PURE__ */ t("$ZodType", (e, t) => {
+}, D = /* @__PURE__ */ t("$ZodType", (e, t) => {
 	var r;
-	e ??= {}, e._zod.def = t, e._zod.bag = e._zod.bag || {}, e._zod.version = ce;
+	e ??= {}, e._zod.def = t, e._zod.bag = e._zod.bag || {}, e._zod.version = le;
 	let i = [...e._zod.def.checks ?? []];
 	e._zod.traits.has("$ZodCheck") && i.unshift(e);
 	for (let t of i) for (let n of t._zod.onattach) n(e);
@@ -238,24 +238,24 @@ var b = (e, t) => {
 	});
 	else {
 		let t = (e, t, r) => {
-			let i = g(e), a;
+			let i = h(e), a;
 			for (let o of t) {
 				if (o._zod.def.when) {
-					if (ne(e) || !o._zod.def.when(e)) continue;
+					if (re(e) || !o._zod.def.when(e)) continue;
 				} else if (i) continue;
 				let t = e.issues.length, s = o._zod.check(e);
 				if (s instanceof Promise && r?.async === !1) throw new n();
 				if (a || s instanceof Promise) a = (a ?? Promise.resolve()).then(async () => {
-					await s, e.issues.length !== t && (i ||= g(e, t));
+					await s, e.issues.length !== t && (i ||= h(e, t));
 				});
 				else {
 					if (e.issues.length === t) continue;
-					i ||= g(e, t);
+					i ||= h(e, t);
 				}
 			}
 			return a ? a.then(() => e) : e;
 		}, r = (r, a, o) => {
-			if (g(r)) return r.aborted = !0, r;
+			if (h(r)) return r.aborted = !0, r;
 			let s = t(a, i, o);
 			if (s instanceof Promise) {
 				if (o.async === !1) throw new n();
@@ -286,17 +286,17 @@ var b = (e, t) => {
 	u(e, "~standard", () => ({
 		validate: (t) => {
 			try {
-				let n = T(e, t);
+				let n = w(e, t);
 				return n.success ? { value: n.data } : { issues: n.error?.issues };
 			} catch {
-				return E(e, t).then((e) => e.success ? { value: e.data } : { issues: e.error?.issues });
+				return T(e, t).then((e) => e.success ? { value: e.data } : { issues: e.error?.issues });
 			}
 		},
 		vendor: "zod",
 		version: 1
 	}));
-}), k = /* @__PURE__ */ t("$ZodString", (e, t) => {
-	O.init(e, t), e._zod.pattern = [...e?._zod.bag?.patterns ?? []].pop() ?? ie(e._zod.bag), e._zod.parse = (n, r) => {
+}), O = /* @__PURE__ */ t("$ZodString", (e, t) => {
+	D.init(e, t), e._zod.pattern = [...e?._zod.bag?.patterns ?? []].pop() ?? ae(e._zod.bag), e._zod.parse = (n, r) => {
 		if (t.coerce) try {
 			n.value = String(n.value);
 		} catch {}
@@ -307,13 +307,13 @@ var b = (e, t) => {
 			inst: e
 		}), n;
 	};
-}), A = /* @__PURE__ */ t("$ZodStringFormat", (e, t) => {
-	se.init(e, t), k.init(e, t);
-}), j = /* @__PURE__ */ t("$ZodURL", (e, t) => {
-	A.init(e, t), e._zod.check = (n) => {
+}), k = /* @__PURE__ */ t("$ZodStringFormat", (e, t) => {
+	ce.init(e, t), O.init(e, t);
+}), A = /* @__PURE__ */ t("$ZodURL", (e, t) => {
+	k.init(e, t), e._zod.check = (n) => {
 		try {
 			let r = n.value.trim();
-			if (!t.normalize && t.protocol?.source === D.source && !/^https?:\/\//i.test(r)) {
+			if (!t.normalize && t.protocol?.source === E.source && !/^https?:\/\//i.test(r)) {
 				n.issues.push({
 					code: "invalid_format",
 					format: "url",
@@ -353,8 +353,8 @@ var b = (e, t) => {
 			});
 		}
 	};
-}), M = /* @__PURE__ */ t("$ZodBoolean", (e, t) => {
-	O.init(e, t), e._zod.pattern = ae, e._zod.parse = (n, r) => {
+}), j = /* @__PURE__ */ t("$ZodBoolean", (e, t) => {
+	D.init(e, t), e._zod.pattern = oe, e._zod.parse = (n, r) => {
 		if (t.coerce) try {
 			n.value = !!n.value;
 		} catch {}
@@ -366,19 +366,19 @@ var b = (e, t) => {
 			inst: e
 		}), n;
 	};
-}), N = /* @__PURE__ */ t("$ZodNever", (e, t) => {
-	O.init(e, t), e._zod.parse = (t, n) => (t.issues.push({
+}), M = /* @__PURE__ */ t("$ZodNever", (e, t) => {
+	D.init(e, t), e._zod.parse = (t, n) => (t.issues.push({
 		expected: "never",
 		code: "invalid_type",
 		input: t.value,
 		inst: e
 	}), t);
 });
-function P(e, t, n) {
-	e.issues.length && t.issues.push(..._(n, e.issues)), t.value[n] = e.value;
+function N(e, t, n) {
+	e.issues.length && t.issues.push(...g(n, e.issues)), t.value[n] = e.value;
 }
-var F = /* @__PURE__ */ t("$ZodArray", (e, t) => {
-	O.init(e, t), e._zod.parse = (n, r) => {
+var P = /* @__PURE__ */ t("$ZodArray", (e, t) => {
+	D.init(e, t), e._zod.parse = (n, r) => {
 		let i = n.value;
 		if (!Array.isArray(i)) return n.issues.push({
 			expected: "array",
@@ -393,16 +393,16 @@ var F = /* @__PURE__ */ t("$ZodArray", (e, t) => {
 				value: o,
 				issues: []
 			}, r);
-			s instanceof Promise ? a.push(s.then((t) => P(t, n, e))) : P(s, n, e);
+			s instanceof Promise ? a.push(s.then((t) => N(t, n, e))) : N(s, n, e);
 		}
 		return a.length ? Promise.all(a).then(() => n) : n;
 	};
 });
-function I(e, t, n, r, i, a) {
+function F(e, t, n, r, i, a) {
 	let o = n in r;
 	if (e.issues.length) {
 		if (i && a && !o) return;
-		t.issues.push(..._(n, e.issues));
+		t.issues.push(...g(n, e.issues));
 	}
 	if (!o && !i) {
 		e.issues.length || t.issues.push({
@@ -415,10 +415,10 @@ function I(e, t, n, r, i, a) {
 	}
 	e.value === void 0 ? o && (t.value[n] = void 0) : t.value[n] = e.value;
 }
-function L(e) {
+function I(e) {
 	let t = Object.keys(e.shape);
 	for (let n of t) if (!e.shape?.[n]?._zod?.traits?.has("$ZodType")) throw Error(`Invalid element at key "${n}": expected a Zod schema`);
-	let n = h(e.shape);
+	let n = m(e.shape);
 	return {
 		...e,
 		keys: t,
@@ -427,7 +427,7 @@ function L(e) {
 		optionalKeys: new Set(n)
 	};
 }
-function R(e, t, n, r, i, a) {
+function L(e, t, n, r, i, a) {
 	let o = [], s = i.keySet, c = i.catchall._zod, l = c.def.type, u = c.optin === "optional", d = c.optout === "optional";
 	for (let i in t) {
 		if (i === "__proto__" || s.has(i)) continue;
@@ -439,7 +439,7 @@ function R(e, t, n, r, i, a) {
 			value: t[i],
 			issues: []
 		}, r);
-		a instanceof Promise ? e.push(a.then((e) => I(e, n, i, t, u, d))) : I(a, n, i, t, u, d);
+		a instanceof Promise ? e.push(a.then((e) => F(e, n, i, t, u, d))) : F(a, n, i, t, u, d);
 	}
 	return o.length && n.issues.push({
 		code: "unrecognized_keys",
@@ -448,15 +448,15 @@ function R(e, t, n, r, i, a) {
 		inst: a
 	}), e.length ? Promise.all(e).then(() => n) : n;
 }
-var z = /* @__PURE__ */ t("$ZodObject", (e, t) => {
-	if (O.init(e, t), !Object.getOwnPropertyDescriptor(t, "shape")?.get) {
+var R = /* @__PURE__ */ t("$ZodObject", (e, t) => {
+	if (D.init(e, t), !Object.getOwnPropertyDescriptor(t, "shape")?.get) {
 		let e = t.shape;
 		Object.defineProperty(t, "shape", { get: () => {
 			let n = { ...e };
 			return Object.defineProperty(t, "shape", { value: n }), n;
 		} });
 	}
-	let n = s(() => L(t));
+	let n = s(() => I(t));
 	u(e._zod, "propValues", () => {
 		let e = t.shape, n = {};
 		for (let t in e) {
@@ -468,7 +468,7 @@ var z = /* @__PURE__ */ t("$ZodObject", (e, t) => {
 		}
 		return n;
 	});
-	let r = f, i = t.catchall, a;
+	let r = ee, i = t.catchall, a;
 	e._zod.parse = (t, o) => {
 		a ??= n.value;
 		let s = t.value;
@@ -485,14 +485,14 @@ var z = /* @__PURE__ */ t("$ZodObject", (e, t) => {
 				value: s[e],
 				issues: []
 			}, o);
-			a instanceof Promise ? c.push(a.then((n) => I(n, t, e, s, r, i))) : I(a, t, e, s, r, i);
+			a instanceof Promise ? c.push(a.then((n) => F(n, t, e, s, r, i))) : F(a, t, e, s, r, i);
 		}
-		return i ? R(c, s, t, o, n.value, e) : c.length ? Promise.all(c).then(() => t) : t;
+		return i ? L(c, s, t, o, n.value, e) : c.length ? Promise.all(c).then(() => t) : t;
 	};
-}), B = /* @__PURE__ */ t("$ZodEnum", (e, t) => {
-	O.init(e, t);
+}), z = /* @__PURE__ */ t("$ZodEnum", (e, t) => {
+	D.init(e, t);
 	let n = a(t.entries), r = new Set(n);
-	e._zod.values = r, e._zod.pattern = RegExp(`^(${n.filter((e) => p.has(typeof e)).map((e) => typeof e == "string" ? ee(e) : e.toString()).join("|")})$`), e._zod.parse = (t, i) => {
+	e._zod.values = r, e._zod.pattern = RegExp(`^(${n.filter((e) => f.has(typeof e)).map((e) => typeof e == "string" ? te(e) : e.toString()).join("|")})$`), e._zod.parse = (t, i) => {
 		let a = t.value;
 		return r.has(a) || t.issues.push({
 			code: "invalid_value",
@@ -502,20 +502,20 @@ var z = /* @__PURE__ */ t("$ZodObject", (e, t) => {
 		}), t;
 	};
 });
-function V(e, t) {
+function B(e, t) {
 	return t === void 0 && (e.issues.length || e.fallback) ? {
 		issues: [],
 		value: void 0
 	} : e;
 }
-var H = /* @__PURE__ */ t("$ZodOptional", (e, t) => {
-	O.init(e, t), e._zod.optin = "optional", e._zod.optout = "optional", u(e._zod, "values", () => t.innerType._zod.values ? new Set([...t.innerType._zod.values, void 0]) : void 0), u(e._zod, "pattern", () => {
+var V = /* @__PURE__ */ t("$ZodOptional", (e, t) => {
+	D.init(e, t), e._zod.optin = "optional", e._zod.optout = "optional", u(e._zod, "values", () => t.innerType._zod.values ? new Set([...t.innerType._zod.values, void 0]) : void 0), u(e._zod, "pattern", () => {
 		let e = t.innerType._zod.pattern;
 		return e ? RegExp(`^(${c(e.source)})?$`) : void 0;
 	}), e._zod.parse = (e, n) => {
 		if (t.innerType._zod.optin === "optional") {
 			let r = e.value, i = t.innerType._zod.run(e, n);
-			return i instanceof Promise ? i.then((e) => V(e, r)) : V(i, r);
+			return i instanceof Promise ? i.then((e) => B(e, r)) : B(i, r);
 		}
 		return e.value === void 0 ? e : t.innerType._zod.run(e, n);
 	};
@@ -523,164 +523,183 @@ var H = /* @__PURE__ */ t("$ZodOptional", (e, t) => {
 //#endregion
 //#region ../../node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/api.js
 /* @__NO_SIDE_EFFECTS__ */
-function U(e, t) {
+function H(e, t) {
 	return new e({
 		type: "string",
-		...m(t)
+		...p(t)
 	});
 }
 /* @__NO_SIDE_EFFECTS__ */
-function W(e, t) {
+function U(e, t) {
 	return new e({
 		type: "string",
 		format: "url",
 		check: "string_format",
 		abort: !1,
-		...m(t)
+		...p(t)
 	});
 }
 /* @__NO_SIDE_EFFECTS__ */
-function G(e, t) {
+function W(e, t) {
 	return new e({
 		type: "boolean",
-		...m(t)
+		...p(t)
 	});
 }
 /* @__NO_SIDE_EFFECTS__ */
-function le(e, t) {
+function ue(e, t) {
 	return new e({
 		type: "never",
-		...m(t)
+		...p(t)
 	});
 }
 //#endregion
 //#region ../../node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/mini/schemas.js
-var K = /* @__PURE__ */ t("ZodMiniType", (e, t) => {
+var G = /* @__PURE__ */ t("ZodMiniType", (e, t) => {
 	if (!e._zod) throw Error("Uninitialized schema in ZodMiniType.");
-	O.init(e, t), e.def = t, e.type = t.type, e.parse = (t, n) => C(e, t, n, { callee: e.parse }), e.safeParse = (t, n) => T(e, t, n), e.parseAsync = async (t, n) => w(e, t, n, { callee: e.parseAsync }), e.safeParseAsync = async (t, n) => E(e, t, n), e.check = (...n) => e.clone({
+	D.init(e, t), e.def = t, e.type = t.type, e.parse = (t, n) => S(e, t, n, { callee: e.parse }), e.safeParse = (t, n) => w(e, t, n), e.parseAsync = async (t, n) => C(e, t, n, { callee: e.parseAsync }), e.safeParseAsync = async (t, n) => T(e, t, n), e.check = (...n) => e.clone({
 		...t,
 		checks: [...t.checks ?? [], ...n.map((e) => typeof e == "function" ? { _zod: {
 			check: e,
 			def: { check: "custom" },
 			onattach: []
 		} } : e)]
-	}, { parent: !0 }), e.with = e.check, e.clone = (t, n) => te(e, t, n), e.brand = () => e, e.register = ((t, n) => (t.add(e, n), e)), e.apply = (t) => t(e);
-}), q = /* @__PURE__ */ t("ZodMiniString", (e, t) => {
+	}, { parent: !0 }), e.with = e.check, e.clone = (t, n) => ne(e, t, n), e.brand = () => e, e.register = ((t, n) => (t.add(e, n), e)), e.apply = (t) => t(e);
+}), K = /* @__PURE__ */ t("ZodMiniString", (e, t) => {
+	O.init(e, t), G.init(e, t);
+});
+/* @__NO_SIDE_EFFECTS__ */
+function q(e) {
+	return /* @__PURE__ */ H(K, e);
+}
+var de = /* @__PURE__ */ t("ZodMiniStringFormat", (e, t) => {
 	k.init(e, t), K.init(e, t);
+}), fe = /* @__PURE__ */ t("ZodMiniURL", (e, t) => {
+	A.init(e, t), de.init(e, t);
 });
 /* @__NO_SIDE_EFFECTS__ */
 function J(e) {
-	return /* @__PURE__ */ U(q, e);
-}
-var ue = /* @__PURE__ */ t("ZodMiniStringFormat", (e, t) => {
-	A.init(e, t), q.init(e, t);
-}), de = /* @__PURE__ */ t("ZodMiniURL", (e, t) => {
-	j.init(e, t), ue.init(e, t);
-});
-/* @__NO_SIDE_EFFECTS__ */
-function Y(e) {
-	return /* @__PURE__ */ W(de, {
-		protocol: D,
-		hostname: re,
-		...m(e)
+	return /* @__PURE__ */ U(fe, {
+		protocol: E,
+		hostname: ie,
+		...p(e)
 	});
 }
-var fe = /* @__PURE__ */ t("ZodMiniBoolean", (e, t) => {
-	M.init(e, t), K.init(e, t);
+var pe = /* @__PURE__ */ t("ZodMiniBoolean", (e, t) => {
+	j.init(e, t), G.init(e, t);
 });
 /* @__NO_SIDE_EFFECTS__ */
-function pe(e) {
-	return /* @__PURE__ */ G(fe, e);
+function me(e) {
+	return /* @__PURE__ */ W(pe, e);
 }
-var me = /* @__PURE__ */ t("ZodMiniNever", (e, t) => {
-	N.init(e, t), K.init(e, t);
+var he = /* @__PURE__ */ t("ZodMiniNever", (e, t) => {
+	M.init(e, t), G.init(e, t);
 });
 /* @__NO_SIDE_EFFECTS__ */
-function he(e) {
-	return /* @__PURE__ */ le(me, e);
+function ge(e) {
+	return /* @__PURE__ */ ue(he, e);
 }
-var ge = /* @__PURE__ */ t("ZodMiniArray", (e, t) => {
-	F.init(e, t), K.init(e, t);
+var _e = /* @__PURE__ */ t("ZodMiniArray", (e, t) => {
+	P.init(e, t), G.init(e, t);
 });
 /* @__NO_SIDE_EFFECTS__ */
-function X(e, t) {
-	return new ge({
+function Y(e, t) {
+	return new _e({
 		type: "array",
 		element: e,
-		...m(t)
+		...p(t)
 	});
 }
-var Z = /* @__PURE__ */ t("ZodMiniObject", (e, t) => {
-	z.init(e, t), K.init(e, t), u(e, "shape", () => t.shape);
+var X = /* @__PURE__ */ t("ZodMiniObject", (e, t) => {
+	R.init(e, t), G.init(e, t), u(e, "shape", () => t.shape);
 });
 /* @__NO_SIDE_EFFECTS__ */
-function _e(e, t) {
-	return new Z({
+function ve(e, t) {
+	return new X({
 		type: "object",
 		shape: e ?? {},
-		...m(t)
+		...p(t)
 	});
 }
-/* @__NO_SIDE_EFFECTS__ */
-function Q(e, t) {
-	return new Z({
-		type: "object",
-		shape: e,
-		catchall: /* @__PURE__ */ he(),
-		...m(t)
-	});
-}
-var ve = /* @__PURE__ */ t("ZodMiniEnum", (e, t) => {
-	B.init(e, t), K.init(e, t), e.options = Object.values(t.entries);
-});
 /* @__NO_SIDE_EFFECTS__ */
 function ye(e, t) {
-	return new ve({
-		type: "enum",
-		entries: Array.isArray(e) ? Object.fromEntries(e.map((e) => [e, e])) : e,
-		...m(t)
+	return new X({
+		type: "object",
+		shape: e,
+		catchall: /* @__PURE__ */ ge(),
+		...p(t)
 	});
 }
-var be = /* @__PURE__ */ t("ZodMiniOptional", (e, t) => {
-	H.init(e, t), K.init(e, t);
+var be = /* @__PURE__ */ t("ZodMiniEnum", (e, t) => {
+	z.init(e, t), G.init(e, t), e.options = Object.values(t.entries);
 });
 /* @__NO_SIDE_EFFECTS__ */
-function $(e) {
+function xe(e, t) {
 	return new be({
+		type: "enum",
+		entries: Array.isArray(e) ? Object.fromEntries(e.map((e) => [e, e])) : e,
+		...p(t)
+	});
+}
+var Se = /* @__PURE__ */ t("ZodMiniOptional", (e, t) => {
+	V.init(e, t), G.init(e, t);
+});
+/* @__NO_SIDE_EFFECTS__ */
+function Z(e) {
+	return new Se({
 		type: "optional",
 		innerType: e
 	});
 }
 //#endregion
-//#region src/create-theme.ts
-var xe = /* @__PURE__ */ Q({
-	name: /* @__PURE__ */ J(),
-	styleTitle: /* @__PURE__ */ J(),
-	styleUrl: /* @__PURE__ */ $(/* @__PURE__ */ Y({ normalize: !0 })),
-	pageUrl: /* @__PURE__ */ $(/* @__PURE__ */ X(/* @__PURE__ */ Y({ normalize: !0 }))),
-	fonts: /* @__PURE__ */ X(/* @__PURE__ */ _e({
-		fontFamily: /* @__PURE__ */ J(),
-		fontWeight: /* @__PURE__ */ J(),
-		fontUrl: /* @__PURE__ */ Y({ normalize: !0 }),
-		fontStyle: /* @__PURE__ */ J(),
-		fontDisplay: /* @__PURE__ */ $(/* @__PURE__ */ ye([
-			"swap",
-			"optional",
-			"fallback",
-			"block",
-			"auto"
-		])),
-		load: /* @__PURE__ */ $(/* @__PURE__ */ pe())
-	}))
-});
-function Se(e) {
-	Array.isArray(e) || (e = [e]), Ce(e);
-}
+//#region src/add-font.ts
 function Ce(e) {
-	let t = e.map((e) => xe.parse(e)), n = !1;
+	document.fonts.add(e);
+}
+//#endregion
+//#region src/fonts.ts
+var Q = /* @__PURE__ */ ve({
+	fontFamily: /* @__PURE__ */ q(),
+	fontWeight: /* @__PURE__ */ q(),
+	fontUrl: /* @__PURE__ */ J({ normalize: !0 }),
+	fontStyle: /* @__PURE__ */ q(),
+	fontDisplay: /* @__PURE__ */ Z(/* @__PURE__ */ xe([
+		"swap",
+		"optional",
+		"fallback",
+		"block",
+		"auto"
+	])),
+	load: /* @__PURE__ */ Z(/* @__PURE__ */ me())
+});
+async function $(e) {
+	Array.isArray(e) || (e = [e]), e = e.map((e) => Q.parse(e));
+	for (let t of e) {
+		let e = new FontFace(t.fontFamily, `url('${t.fontUrl}`, {
+			style: t.fontStyle,
+			weight: t.fontWeight,
+			display: t.fontDisplay ?? "swap"
+		});
+		Ce(e), (t.load == null || t.load) && e.load();
+	}
+}
+//#endregion
+//#region src/create-theme.ts
+var we = /* @__PURE__ */ ye({
+	name: /* @__PURE__ */ q(),
+	styleTitle: /* @__PURE__ */ q(),
+	styleUrl: /* @__PURE__ */ Z(/* @__PURE__ */ J({ normalize: !0 })),
+	pageUrl: /* @__PURE__ */ Z(/* @__PURE__ */ Y(/* @__PURE__ */ J({ normalize: !0 }))),
+	fonts: /* @__PURE__ */ Z(/* @__PURE__ */ Y(Q))
+});
+function Te(e) {
+	Array.isArray(e) || (e = [e]), Ee(e);
+}
+function Ee(e) {
+	let t = e.map((e) => we.parse(e)), n = !1;
 	for (let e of t) e.name === "default" && (n = !0);
 	if (!n) throw Error("Theme specification must have default theme");
 	return t;
 }
 //#endregion
-export { Se as createTheme };
+export { Q as FontSpecSchema, Te as createTheme, $ as loadFonts };

@@ -4,7 +4,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: ['index.ts'],
-      name: 'ThemeTools',
+      name: 'welcomeHome.themeTools',
       fileName: 'theme-tools',
       formats: ['es', 'iife'],
     },

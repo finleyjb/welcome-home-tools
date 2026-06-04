@@ -1,25 +1,18 @@
-import * as z from 'zod/mini';
-import { FontSpecSchema } from './fonts';
+import { setThemes } from './theme-store';
+import { type Theme, ThemeSchema } from './types';
 
-const Theme = z.strictObject({
-  name: z.string(),
-  styleTitle: z.string(),
-  styleUrl: z.optional(z.httpUrl({ normalize: true })),
-  pageUrl: z.optional(z.array(z.httpUrl({ normalize: true }))),
-  fonts: z.array(FontSpecSchema),
-});
-
-type ThemeType = z.infer<typeof Theme>;
-export function createTheme(themes: ThemeType | ThemeType[]) {
+export function createTheme(themes: Theme | Theme[]) {
   if (!Array.isArray(themes)) {
     themes = [themes];
   }
 
   const validatedThemes = validateThemes(themes);
+
+  setThemes(validatedThemes);
 }
 
-function validateThemes(themes: ThemeType[]): ThemeType[] {
-  const parsedThemes = themes.map((theme) => Theme.parse(theme));
+function validateThemes(themes: Theme[]): Theme[] {
+  const parsedThemes = themes.map((theme) => ThemeSchema.parse(theme));
 
   let hasDefault = false;
   for (const theme of parsedThemes) {

@@ -1,10 +1,11 @@
 {
-  "name": "@bear-tools/theme-tools",
+  "name": "@welcome-home/theme-tools",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -12,9 +13,11 @@
   "type": "module",
   "devDependencies": {
     "@preact/preset-vite": "^2.10.5",
+    "jsdom": "^29.1.1",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.14",
+    "vitest": "^4.1.7",
     "zod": "^4.4.3"
   },
   "dependencies": {

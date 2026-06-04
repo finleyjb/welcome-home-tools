@@ -1,4 +1,5 @@
 import * as z from 'zod/mini';
+import { addFont } from './add-font';
 
 export const FontSpecSchema = z.object({
   fontFamily: z.string(),
@@ -15,7 +16,7 @@ export const FontSpecSchema = z.object({
 
 type FontSpec = z.infer<typeof FontSpecSchema>;
 
-export function loadFonts(fonts: FontSpec | FontSpec[]) {
+export async function loadFonts(fonts: FontSpec | FontSpec[]) {
   if (!Array.isArray(fonts)) {
     fonts = [fonts];
   }
@@ -23,24 +24,16 @@ export function loadFonts(fonts: FontSpec | FontSpec[]) {
   fonts = fonts.map((fontSpec) => FontSpecSchema.parse(fontSpec));
 
   for (const font of fonts) {
-    if (font.load == null || font.load) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = font.fontUrl;
-      link.crossOrigin = 'anonymous';
-      link.as = 'font';
-      link.type = 'font/woff2';
-      document.head.appendChild(link);
-    }
-
     const fontFace = new FontFace(font.fontFamily, `url('${font.fontUrl}`, {
       style: font.fontStyle,
       weight: font.fontWeight,
       display: font.fontDisplay ?? 'swap',
     });
 
-    document.fonts.add(fontFace);
+    addFont(fontFace);
 
-    fontFace.load();
+    if (font.load == null || font.load) {
+      fontFace.load();
+    }
   }
 }
