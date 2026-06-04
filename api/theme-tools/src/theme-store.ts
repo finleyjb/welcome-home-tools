@@ -72,7 +72,9 @@ function validateThemes(themeName: string, themes: ThemeDict): ThemeDict {
   }
 
   if (!hasSpecifiedThemeName) {
-    throw new Error('Theme specification must have default theme');
+    throw new ThemeToolsError(
+      `Default theme ${themeName} is not in list of themes`,
+    );
   }
 
   return validatedThemes;
