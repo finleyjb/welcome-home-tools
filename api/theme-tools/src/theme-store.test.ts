@@ -25,18 +25,22 @@ afterEach(() => {
 
 describe('Theme store', () => {
   test('can set theme once', async () => {
-    createThemes('non-default', [
-      { name: 'default', styleTitle: 'default' },
-      { name: 'non-default', styleTitle: 'non-default' },
-    ]);
+    createThemes('non-default', {
+      themes: [
+        { name: 'default', styleTitle: 'default' },
+        { name: 'non-default', styleTitle: 'non-default' },
+      ],
+    });
   });
 
   test('can repeatedly set theme', () => {
-    createThemes('default', [
-      { name: 'default', styleTitle: 'default' },
-      { name: 'theme1', styleTitle: 'theme1' },
-      { name: 'theme2', styleTitle: 'theme2' },
-    ]);
+    createThemes('default', {
+      themes: [
+        { name: 'default', styleTitle: 'default' },
+        { name: 'theme1', styleTitle: 'theme1' },
+        { name: 'theme2', styleTitle: 'theme2' },
+      ],
+    });
     vi.advanceTimersToNextTimer();
 
     const themeNames: string[] = [];
@@ -53,22 +57,28 @@ describe('Theme store', () => {
   });
 
   test('subscribes theme listener', () => {
-    createThemes('default', [{ name: 'default', styleTitle: 'default' }]);
+    createThemes('default', {
+      themes: [{ name: 'default', styleTitle: 'default' }],
+    });
     expect(_listenForThemeChange).toHaveBeenCalled();
   });
 
   test('createTheme does validation', () => {
     expect
       .soft(() => {
-        createThemes('asdf', [{ name: 'jkl;', styleTitle: 'jkl;' }]);
+        createThemes('asdf', {
+          themes: [{ name: 'jkl;', styleTitle: 'jkl;' }],
+        });
       })
       .toThrow();
 
     expect
       .soft(() => {
-        createThemes('asdf', [
-          { name: 'asdf', styleTitle: 'asdf', styleUrl: '/not/a/valid/url' },
-        ]);
+        createThemes('asdf', {
+          themes: [
+            { name: 'asdf', styleTitle: 'asdf', styleUrl: '/not/a/valid/url' },
+          ],
+        });
       })
       .toThrow();
   });

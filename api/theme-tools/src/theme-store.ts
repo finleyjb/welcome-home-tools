@@ -1,7 +1,7 @@
 import { atom, computed } from 'nanostores';
 import { ThemeToolsError } from './exception.ts';
 import { _listenForThemeChange } from './theme-execution.ts';
-import { type Theme, ThemeSchema } from './types.ts';
+import { type Theme, type ThemeDict, ThemeDictSchema } from './types.ts';
 
 class ThemeStore {
   readonly $themes;
@@ -9,8 +9,8 @@ class ThemeStore {
   readonly $currentTheme;
   readonly themeListenerUnsubscribe;
 
-  constructor(currentThemeName: string, themes: Theme[]) {
-    this.$themes = atom<Theme[]>(themes);
+  constructor(currentThemeName: string, themes: ThemeDict) {
+    this.$themes = atom<Theme[]>(themes.themes);
     this.$currentThemeName = atom<string>(currentThemeName);
     this.$currentTheme = computed(
       [this.$themes, this.$currentThemeName],
@@ -55,24 +55,17 @@ export function setCurrentThemeName(themeName: string) {
   _getStore().$currentThemeName.set(themeName);
 }
 
-export function createThemes(
-  currentThemeName: string,
-  themes: Theme | Theme[],
-) {
-  if (!Array.isArray(themes)) {
-    themes = [themes];
-  }
-
+export function createThemes(currentThemeName: string, themes: ThemeDict) {
   const validatedThemes = validateThemes(currentThemeName, themes);
 
   store = new ThemeStore(currentThemeName, validatedThemes);
 }
 
-function validateThemes(themeName: string, themes: Theme[]): Theme[] {
-  const parsedThemes = themes.map((theme) => ThemeSchema.parse(theme));
+function validateThemes(themeName: string, themes: ThemeDict): ThemeDict {
+  const validatedThemes = ThemeDictSchema.parse(themes);
 
   let hasSpecifiedThemeName = false;
-  for (const theme of parsedThemes) {
+  for (const theme of validatedThemes.themes) {
     if (theme.name === themeName) {
       hasSpecifiedThemeName = true;
     }
@@ -82,5 +75,5 @@ function validateThemes(themeName: string, themes: Theme[]): Theme[] {
     throw new Error('Theme specification must have default theme');
   }
 
-  return parsedThemes;
+  return validatedThemes;
 }

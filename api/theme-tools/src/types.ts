@@ -8,3 +8,7 @@ export const ThemeSchema = z.strictObject({
 });
 
 export type Theme = z.infer<typeof ThemeSchema>;
+
+export const ThemeDictSchema = z.strictObject({ themes: z.array(ThemeSchema) });
+
+export type ThemeDict = z.infer<typeof ThemeDictSchema>;
