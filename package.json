@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "pnpm -r --parallel test",
+    "build": "pnpm -r --parallel build",
+    "check": "pnpm check:ci --write",
+    "check:ci": "pnpx @biomejs/biome check",
     "prepare": "husky"
   },
   "keywords": [],
