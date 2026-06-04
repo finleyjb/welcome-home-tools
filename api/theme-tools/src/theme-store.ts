@@ -1,67 +1,73 @@
-import { atom, batched } from 'nanostores';
-import type { Theme } from './types.ts';
+import { atom, computed } from 'nanostores';
+import { ThemeToolsError } from './exception.ts';
+import { type Theme, ThemeSchema } from './types.ts';
 
-export const $themes = atom<Theme[]>([
-  { name: 'default', styleTitle: 'default' },
-]);
+class ThemeStore {
+  readonly $themes;
+  readonly $currentThemeName;
+  readonly $currentTheme;
 
-export const $currentThemeName = atom<string>('default');
+  constructor(currentThemeName: string, themes: Theme[]) {
+    this.$themes = atom<Theme[]>(themes);
+    this.$currentThemeName = atom<string>(currentThemeName);
+    this.$currentTheme = computed(
+      [this.$themes, this.$currentThemeName],
+      (themes, currentThemeName) => {
+        const theme = themes.find((theme) => theme.name === currentThemeName);
+        if (!theme) {
+          throw new ThemeToolsError(`Unknown theme ${currentThemeName}`);
+        }
+        return theme;
+      },
+    );
+  }
+}
 
-// Only exported for test, not intended to be exposed externally
-export const $currentTheme = batched(
-  [$themes, $currentThemeName],
-  (themes: Theme[], currentThemeName: string) => {
-    let currentTheme =
-      themes.find((theme) => theme.name === currentThemeName) ??
-      themes.find((theme) => theme.name === 'default');
+let store: ThemeStore | undefined;
 
-    if (!currentTheme) {
-      currentTheme = { name: 'default', styleTitle: 'default' };
-      if (currentThemeName === 'default') {
-        console.error(`No theme found for name default`);
-      } else {
-        console.error(`No theme found for name ${currentThemeName} or default`);
-      }
+export function _getStore(): ThemeStore {
+  if (!store) {
+    throw new ThemeToolsError('getStore called before createTheme');
+  }
+
+  return store;
+}
+
+export function _resetStore() {
+  store = undefined;
+}
+
+export function subscribeCurrentTheme(cb: (theme: Theme) => void): () => void {
+  return _getStore().$currentTheme.subscribe(cb);
+}
+
+export function setCurrentThemeName(themeName: string) {
+  _getStore().$currentThemeName.set(themeName);
+}
+
+export function createTheme(currentThemeName: string, themes: Theme | Theme[]) {
+  if (!Array.isArray(themes)) {
+    themes = [themes];
+  }
+
+  const validatedThemes = validateThemes(currentThemeName, themes);
+
+  store = new ThemeStore(currentThemeName, validatedThemes);
+}
+
+function validateThemes(themeName: string, themes: Theme[]): Theme[] {
+  const parsedThemes = themes.map((theme) => ThemeSchema.parse(theme));
+
+  let hasSpecifiedThemeName = false;
+  for (const theme of parsedThemes) {
+    if (theme.name === themeName) {
+      hasSpecifiedThemeName = true;
     }
+  }
 
-    return currentTheme;
-  },
-);
+  if (!hasSpecifiedThemeName) {
+    throw new Error('Theme specification must have default theme');
+  }
 
-// Only exported for other modules. Not to be exported externally.
-/** @internal */
-export function setThemes(themes: Theme[]) {
-  $themes.set(themes);
-}
-
-export function setThemeName(themeName: string) {
-  $currentThemeName.set(themeName);
-}
-
-export function getCurrentTheme(): Promise<Theme> {
-  let resolve: (value: Theme) => void;
-  const returnPromise = new Promise<Theme>((resolveFn, _reject) => {
-    resolve = resolveFn;
-  });
-
-  let valueResolved = false;
-
-  // Since the batched value is set asynchronously, read it after a tick
-  setTimeout(() => {
-    const unsubscribe = $currentTheme.subscribe((val) => {
-      if (!valueResolved) {
-        resolve(val as Theme);
-        valueResolved = true;
-        setTimeout(() => {
-          unsubscribe();
-        });
-      }
-    });
-  });
-
-  return returnPromise;
-}
-
-export function subscribeCurrentTheme(cb: (value: Readonly<Theme>) => void) {
-  return $currentTheme.subscribe(cb);
+  return parsedThemes;
 }
