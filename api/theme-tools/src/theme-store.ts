@@ -1,11 +1,13 @@
 import { atom, computed } from 'nanostores';
 import { ThemeToolsError } from './exception.ts';
+import { _listenForThemeChange } from './theme-execution.ts';
 import { type Theme, ThemeSchema } from './types.ts';
 
 class ThemeStore {
   readonly $themes;
   readonly $currentThemeName;
   readonly $currentTheme;
+  readonly themeListenerUnsubscribe;
 
   constructor(currentThemeName: string, themes: Theme[]) {
     this.$themes = atom<Theme[]>(themes);
@@ -20,6 +22,14 @@ class ThemeStore {
         return theme;
       },
     );
+
+    this.themeListenerUnsubscribe = this.$currentTheme.subscribe(
+      _listenForThemeChange,
+    );
+  }
+
+  cleanup() {
+    this.themeListenerUnsubscribe();
   }
 }
 

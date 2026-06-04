@@ -1,4 +1,10 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+
+vi.mock(import('./theme-execution.ts'), () => ({
+  _listenForThemeChange: vi.fn(),
+}));
+
+import { _listenForThemeChange } from './theme-execution.ts';
 import {
   _resetStore,
   createThemes,
@@ -44,5 +50,26 @@ describe('Theme store', () => {
 
     expect(themeNames).toEqual(['default', 'theme1', 'theme2']);
     unsubscribe();
+  });
+
+  test('subscribes theme listener', () => {
+    createThemes('default', [{ name: 'default', styleTitle: 'default' }]);
+    expect(_listenForThemeChange).toHaveBeenCalled();
+  });
+
+  test('createTheme does validation', () => {
+    expect
+      .soft(() => {
+        createThemes('asdf', [{ name: 'jkl;', styleTitle: 'jkl;' }]);
+      })
+      .toThrow();
+
+    expect
+      .soft(() => {
+        createThemes('asdf', [
+          { name: 'asdf', styleTitle: 'asdf', styleUrl: '/not/a/valid/url' },
+        ]);
+      })
+      .toThrow();
   });
 });
