@@ -217,7 +217,7 @@ importers:
         specifier: ^17.0.7
         version: 17.0.7
 
-  tools/theme-tools:
+  api/theme-tools:
     dependencies:
       nanostores:
         specifier: github:nanostores/nanostores
@@ -1355,7 +1355,7 @@ packages:
     hasBin: true
 
   nanostores@https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48:
-    resolution: {gitHosted: true, integrity: sha512-aRkZY1yPAW9lmAeCTUwTaZ5dHlIVivDsJgUjrn7KZl13pfiFsyeyZOsYxx1i+It99quegASTU6Ot54RIMuPeiA==, tarball: https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/nanostores/nanostores/tar.gz/d703421c90965909b19165d7c5bcdf62db0c5b48}
     version: 1.3.0
     engines: {node: ^20.0.0 || >=22.0.0}
 
