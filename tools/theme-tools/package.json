@@ -1,13 +1,28 @@
 {
-  "name": "theme-tools",
+  "name": "@bear-tools/theme-tools",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14",
+    "zod": "^4.4.3"
+  },
+  "dependencies": {
+    "nanostores": "github:nanostores/nanostores",
+    "preact": "^10.29.2",
+    "preact-custom-element": "^4.6.0"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3"
+  }
 }
