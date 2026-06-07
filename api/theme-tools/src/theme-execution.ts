@@ -12,6 +12,7 @@ export function _listenForThemeChange(currentTheme: Theme) {
     link.href = currentTheme.styleUrl;
     link.rel = 'stylesheet';
     link.blocking = 'render';
+    link.crossOrigin = 'anonymous';
     link.title = currentTheme.styleTitle;
     document.head.appendChild(link);
   }
