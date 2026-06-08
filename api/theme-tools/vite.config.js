@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
-
-// : ['index.ts', 'index-with-globals.ts'],
+import { analyzer } from 'vite-bundle-analyzer';
 
 export default defineConfig({
+  plugins: [analyzer()],
   build: {
     lib: {
       entry: 'index.ts',
