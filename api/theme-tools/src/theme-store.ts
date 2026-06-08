@@ -1,8 +1,14 @@
 import { atom, computed } from 'nanostores';
+import { parse } from 'valibot';
 import { ThemeToolsError } from './exception.ts';
 import { _prefetchLinks } from './prefetch.ts';
 import { _listenForThemeChange } from './theme-execution.ts';
-import { type Theme, type ThemeDict, ThemeDictSchema } from './types.ts';
+import {
+  type Theme,
+  type ThemeDictInput,
+  type ThemeDictOutput,
+  ThemeDictSchema,
+} from './types.ts';
 
 class ThemeStore {
   readonly $themes;
@@ -10,7 +16,7 @@ class ThemeStore {
   readonly $currentTheme;
   readonly themeListenerUnsubscribe;
 
-  constructor(currentThemeName: string, themes: ThemeDict) {
+  constructor(currentThemeName: string, themes: ThemeDictOutput) {
     this.$themes = atom<Theme[]>(themes.themes);
     this.$currentThemeName = atom<string>(currentThemeName);
     this.$currentTheme = computed(
@@ -56,7 +62,7 @@ export function setCurrentThemeName(themeName: string) {
   _getStore().$currentThemeName.set(themeName);
 }
 
-export function createThemes(currentThemeName: string, themes: ThemeDict) {
+export function createThemes(currentThemeName: string, themes: ThemeDictInput) {
   const validatedThemes = validateThemes(currentThemeName, themes);
 
   store = new ThemeStore(currentThemeName, validatedThemes);
@@ -64,8 +70,11 @@ export function createThemes(currentThemeName: string, themes: ThemeDict) {
   _prefetchLinks(currentThemeName, themes.themes);
 }
 
-function validateThemes(themeName: string, themes: ThemeDict): ThemeDict {
-  const validatedThemes = ThemeDictSchema.parse(themes);
+function validateThemes(
+  themeName: string,
+  themes: ThemeDictInput,
+): ThemeDictOutput {
+  const validatedThemes: ThemeDictOutput = parse(ThemeDictSchema, themes);
 
   let hasSpecifiedThemeName = false;
   for (const theme of validatedThemes.themes) {
