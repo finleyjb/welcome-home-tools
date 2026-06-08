@@ -2,6 +2,10 @@
   "name": "welcome-home-workspace",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "LGPL-3.0-or-later",
+  "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "pnpm -r --parallel test",
@@ -10,10 +14,12 @@
     "check:ci": "pnpx @biomejs/biome check",
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "",
-  "license": "LGPL-3.0-or-later",
-  "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916",
+  "devDependencies": {
+    "@biomejs/biome": "2.4.16",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.3"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -21,11 +27,5 @@
       "onFail": "download"
     }
   },
-  "type": "module",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.16",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.7",
-    "prettier": "^3.8.3"
-  }
+  "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916"
 }

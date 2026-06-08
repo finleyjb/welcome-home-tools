@@ -30,20 +30,13 @@ afterEach(() => {
 describe('Theme store', () => {
   test('can set theme once', async () => {
     createThemes('non-default', {
-      themes: [
-        { name: 'default', styleTitle: 'default' },
-        { name: 'non-default', styleTitle: 'non-default' },
-      ],
+      themes: [{ name: 'default' }, { name: 'non-default' }],
     });
   });
 
   test('can repeatedly set theme', () => {
     createThemes('default', {
-      themes: [
-        { name: 'default', styleTitle: 'default' },
-        { name: 'theme1', styleTitle: 'theme1' },
-        { name: 'theme2', styleTitle: 'theme2' },
-      ],
+      themes: [{ name: 'default' }, { name: 'theme1' }, { name: 'theme2' }],
     });
     vi.advanceTimersToNextTimer();
 
@@ -62,7 +55,7 @@ describe('Theme store', () => {
 
   test('subscribes theme listener', () => {
     createThemes('default', {
-      themes: [{ name: 'default', styleTitle: 'default' }],
+      themes: [{ name: 'default' }],
     });
     expect(_listenForThemeChange).toHaveBeenCalled();
   });
@@ -71,7 +64,7 @@ describe('Theme store', () => {
     expect
       .soft(() => {
         createThemes('asdf', {
-          themes: [{ name: 'jkl;', styleTitle: 'jkl;' }],
+          themes: [{ name: 'jkl;' }],
         });
       })
       .toThrow();
@@ -79,9 +72,7 @@ describe('Theme store', () => {
     expect
       .soft(() => {
         createThemes('asdf', {
-          themes: [
-            { name: 'asdf', styleTitle: 'asdf', styleUrl: '/not/a/valid/url' },
-          ],
+          themes: [{ name: 'asdf', styleUrl: '/not/a/valid/url' }],
         });
       })
       .toThrow();

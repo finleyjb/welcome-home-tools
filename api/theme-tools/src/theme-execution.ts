@@ -13,7 +13,7 @@ export function _listenForThemeChange(currentTheme: Theme) {
     link.rel = 'stylesheet';
     link.blocking = 'render';
     link.crossOrigin = 'anonymous';
-    link.title = currentTheme.styleTitle;
+    link.title = currentTheme.name;
     document.head.appendChild(link);
   }
 
@@ -37,7 +37,7 @@ export function _listenForThemeChange(currentTheme: Theme) {
         continue;
       }
 
-      styleSheet.disabled = styleSheetTitle !== currentTheme.styleTitle;
+      styleSheet.disabled = styleSheetTitle !== currentTheme.name;
     }
   }
 }

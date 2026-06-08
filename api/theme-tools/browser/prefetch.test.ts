@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe('Link prefetch', () => {
   test('prefetches no links', () => {
-    _prefetchLinks('non-default', [{ name: 'default', styleTitle: 'default' }]);
+    _prefetchLinks('non-default', [{ name: 'default' }]);
     expect(document.querySelector('link[href]')).toBeNullable();
   });
 
@@ -16,7 +16,6 @@ describe('Link prefetch', () => {
     _prefetchLinks('non-default', [
       {
         name: 'default',
-        styleTitle: 'default',
         styleUrl,
         preloadStrategy: 'prefetch',
       },
@@ -32,7 +31,6 @@ describe('Link prefetch', () => {
     _prefetchLinks('default', [
       {
         name: 'default',
-        styleTitle: 'default',
         styleUrl,
         preloadStrategy: 'prefetch',
       },

@@ -11,7 +11,6 @@ describe('Theme listener', () => {
 
     _listenForThemeChange({
       name: 'default',
-      styleTitle: 'default',
       styleUrl,
     });
     expect(
@@ -23,12 +22,10 @@ describe('Theme listener', () => {
     const styleUrl = 'https://domain.com/style.css';
     _listenForThemeChange({
       name: 'default',
-      styleTitle: 'default',
       styleUrl,
     });
     _listenForThemeChange({
       name: 'default',
-      styleTitle: 'default',
       styleUrl,
     });
 
@@ -48,7 +45,6 @@ describe('Theme listener', () => {
 
     _listenForThemeChange({
       name: 'default',
-      styleTitle: 'default',
     });
 
     expect(nonDefaultStyle.sheet?.disabled).toBeTruthy();
@@ -56,7 +52,6 @@ describe('Theme listener', () => {
 
     _listenForThemeChange({
       name: 'non-default',
-      styleTitle: 'non-default',
     });
 
     expect(nonDefaultStyle.sheet?.disabled).toBeFalsy();
@@ -78,7 +73,6 @@ describe('Theme listener', () => {
 
     _listenForThemeChange({
       name: 'default',
-      styleTitle: 'default',
     });
 
     expect.soft(nonDefaultLink.sheet?.disabled).toBeTruthy();
@@ -86,7 +80,6 @@ describe('Theme listener', () => {
 
     _listenForThemeChange({
       name: 'non-default',
-      styleTitle: 'non-default',
     });
 
     expect.soft(nonDefaultLink.sheet?.disabled).toBeFalsy();
@@ -102,12 +95,12 @@ describe('Theme listener', () => {
     defaultStyle.setAttribute('data-name', 'default');
     document.head.appendChild(defaultStyle);
 
-    _listenForThemeChange({ name: 'default', styleTitle: 'default' });
+    _listenForThemeChange({ name: 'default' });
 
     expect(defaultStyle.sheet?.disabled).toBeFalsy();
     expect(nonDefaultStyle.sheet?.disabled).toBeTruthy();
 
-    _listenForThemeChange({ name: 'non-default', styleTitle: 'non-default' });
+    _listenForThemeChange({ name: 'non-default' });
 
     expect(defaultStyle.sheet?.disabled).toBeTruthy();
     expect(nonDefaultStyle.sheet?.disabled).toBeFalsy();
