@@ -1,15 +1,25 @@
-import { afterEach, describe, expect, test } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { _listenForThemeChange } from '../src/theme-execution';
+import type { Theme } from '../src/types';
 
 afterEach(() => {
   document.head.innerHTML = '';
 });
 
+beforeEach(() => {
+  vi.useFakeTimers();
+});
+
+function callListen(theme: Theme) {
+  _listenForThemeChange(theme);
+  vi.advanceTimersToNextFrame();
+}
+
 describe('Theme listener', () => {
   test('creates link tag', () => {
     const styleUrl = 'https://domain.com/style.css';
 
-    _listenForThemeChange({
+    callListen({
       name: 'default',
       styleUrl,
     });
@@ -20,14 +30,16 @@ describe('Theme listener', () => {
 
   test("doesn't recreate links", () => {
     const styleUrl = 'https://domain.com/style.css';
-    _listenForThemeChange({
+    callListen({
       name: 'default',
       styleUrl,
     });
-    _listenForThemeChange({
+
+    callListen({
       name: 'default',
       styleUrl,
     });
+    vi.advanceTimersToNextFrame();
 
     expect(document.querySelectorAll(`link[href="${styleUrl}"]`)).toHaveLength(
       1,
@@ -44,14 +56,14 @@ describe('Theme listener', () => {
     defaultStyle.setAttribute('data-name', 'default');
     document.head.appendChild(defaultStyle);
 
-    _listenForThemeChange({
+    callListen({
       name: 'default',
     });
 
     expect(nonDefaultStyle.sheet?.disabled).toBeTruthy();
     expect(defaultStyle.sheet?.disabled).toBeFalsy();
 
-    _listenForThemeChange({
+    callListen({
       name: 'non-default',
     });
 
@@ -72,14 +84,14 @@ describe('Theme listener', () => {
     nonDefaultLink.setAttribute('data-name', 'non-default');
     document.head.appendChild(nonDefaultLink);
 
-    _listenForThemeChange({
+    callListen({
       name: 'default',
     });
 
     expect.soft(nonDefaultLink.sheet?.disabled).toBeTruthy();
     expect.soft(defaultLink.sheet?.disabled).toBeFalsy();
 
-    _listenForThemeChange({
+    callListen({
       name: 'non-default',
     });
 
@@ -96,12 +108,12 @@ describe('Theme listener', () => {
     defaultStyle.setAttribute('data-name', 'default');
     document.head.appendChild(defaultStyle);
 
-    _listenForThemeChange({ name: 'default' });
+    callListen({ name: 'default' });
 
     expect(defaultStyle.sheet?.disabled).toBeFalsy();
     expect(nonDefaultStyle.sheet?.disabled).toBeTruthy();
 
-    _listenForThemeChange({ name: 'non-default' });
+    callListen({ name: 'non-default' });
 
     expect(defaultStyle.sheet?.disabled).toBeTruthy();
     expect(nonDefaultStyle.sheet?.disabled).toBeFalsy();

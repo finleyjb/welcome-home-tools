@@ -24,18 +24,20 @@ export function _listenForThemeChange(currentTheme: Theme) {
   }
 
   function updateStylesheets() {
-    for (const styleSheet of document.styleSheets) {
-      const sheetNode = styleSheet.ownerNode;
-      let styleSheetTitle: string | null | undefined;
-      if (!(sheetNode instanceof ProcessingInstruction)) {
-        styleSheetTitle = sheetNode?.getAttribute('data-name');
-      }
+    requestAnimationFrame(() => {
+      for (const styleSheet of document.styleSheets) {
+        const sheetNode = styleSheet.ownerNode;
+        let styleSheetTitle: string | null | undefined;
+        if (!(sheetNode instanceof ProcessingInstruction)) {
+          styleSheetTitle = sheetNode?.getAttribute('data-name');
+        }
 
-      if (!styleSheetTitle) {
-        continue;
-      }
+        if (!styleSheetTitle) {
+          continue;
+        }
 
-      styleSheet.disabled = styleSheetTitle !== currentTheme.name;
-    }
+        styleSheet.disabled = styleSheetTitle !== currentTheme.name;
+      }
+    });
   }
 }
