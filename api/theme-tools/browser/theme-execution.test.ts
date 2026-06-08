@@ -36,11 +36,12 @@ describe('Theme listener', () => {
 
   test('disables unused stylesheets', () => {
     const nonDefaultStyle = document.createElement('style');
+    nonDefaultStyle.setAttribute('data-name', 'non-default');
     nonDefaultStyle.title = 'non-default';
     document.head.appendChild(nonDefaultStyle);
 
     const defaultStyle = document.createElement('style');
-    defaultStyle.title = 'default';
+    defaultStyle.setAttribute('data-name', 'default');
     document.head.appendChild(defaultStyle);
 
     _listenForThemeChange({
@@ -62,13 +63,13 @@ describe('Theme listener', () => {
     const defaultLink = document.createElement('link');
     defaultLink.rel = 'stylesheet';
     defaultLink.href = 'data:text/css,body{}';
-    defaultLink.title = 'default';
+    defaultLink.setAttribute('data-name', 'default');
     document.head.appendChild(defaultLink);
 
     const nonDefaultLink = document.createElement('link');
     nonDefaultLink.rel = 'stylesheet';
     nonDefaultLink.href = 'data:text/css,p{}';
-    nonDefaultLink.title = 'non-default';
+    nonDefaultLink.setAttribute('data-name', 'non-default');
     document.head.appendChild(nonDefaultLink);
 
     _listenForThemeChange({
