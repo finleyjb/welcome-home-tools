@@ -10,6 +10,8 @@ import {
   url,
 } from 'valibot';
 
+const PreloadStrategy = picklist(['preload', 'prefetch']);
+
 export const ThemeSchema = strictObject({
   name: string('Name must be a string'),
   styleUrl: optional(
@@ -18,13 +20,19 @@ export const ThemeSchema = strictObject({
       url('styleUrl must be valid url'),
     ),
   ),
-  preloadStrategy: optional(picklist(['preload', 'prefetch'])),
+  preloadStrategy: optional(PreloadStrategy),
 });
 
 export type Theme = InferOutput<typeof ThemeSchema>;
 
+export const PathSchema = strictObject({
+  path: string(),
+  defaultTheme: string(),
+});
+
 export const ThemeDictSchema = strictObject({
   themes: array(ThemeSchema),
+  paths: optional(array(PathSchema)),
 });
 
 export type ThemeDictInput = InferInput<typeof ThemeDictSchema>;

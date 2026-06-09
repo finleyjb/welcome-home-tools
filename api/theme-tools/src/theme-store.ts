@@ -1,5 +1,6 @@
 import { atom, computed } from 'nanostores';
 import { parse } from 'valibot';
+import { _chooseDefaultTheme } from './default-theme.ts';
 import { ThemeToolsError } from './exception.ts';
 import { _prefetchLinks } from './prefetch.ts';
 import { _listenForThemeChange } from './theme-execution.ts';
@@ -18,7 +19,9 @@ class ThemeStore {
 
   constructor(currentThemeName: string, themes: ThemeDictOutput) {
     this.$themes = atom<Theme[]>(themes.themes);
-    this.$currentThemeName = atom<string>(currentThemeName);
+    this.$currentThemeName = atom<string>(
+      _chooseDefaultTheme(currentThemeName, themes),
+    );
     this.$currentTheme = computed(
       [this.$themes, this.$currentThemeName],
       (themes, currentThemeName) => {
@@ -76,17 +79,22 @@ function validateThemes(
 ): ThemeDictOutput {
   const validatedThemes: ThemeDictOutput = parse(ThemeDictSchema, themes);
 
-  let hasSpecifiedThemeName = false;
-  for (const theme of validatedThemes.themes) {
-    if (theme.name === themeName) {
-      hasSpecifiedThemeName = true;
-    }
-  }
+  const themeNames = new Set(themes.themes.map((theme) => theme.name));
 
-  if (!hasSpecifiedThemeName) {
+  if (!themeNames.has(themeName)) {
     throw new ThemeToolsError(
       `Default theme ${themeName} is not in list of themes`,
     );
+  }
+
+  if (Array.isArray(themes.paths)) {
+    for (const pathConfig of themes.paths) {
+      if (!themeNames.has(pathConfig.path)) {
+        throw new ThemeToolsError(
+          `Path ${pathConfig.path} uses theme ${pathConfig.defaultTheme} which does not exist`,
+        );
+      }
+    }
   }
 
   return validatedThemes;

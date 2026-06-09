@@ -8,6 +8,10 @@ vi.mock(import('./prefetch.ts'), () => ({
   _prefetchLinks: vi.fn(),
 }));
 
+vi.mock(import('./default-theme.ts'), () => ({
+  _chooseDefaultTheme: vi.fn((themeName) => themeName),
+}));
+
 import { _listenForThemeChange } from './theme-execution.ts';
 import {
   _resetStore,
@@ -76,5 +80,14 @@ describe('Theme store', () => {
         });
       })
       .toThrow();
+  });
+
+  test('createThemes does path validation', () => {
+    expect(() => {
+      createThemes('asdf', {
+        themes: [{ name: 'asdf' }, { name: 'path-default' }],
+        paths: [{ path: '/path/default', defaultTheme: 'other-theme' }],
+      });
+    }).toThrow();
   });
 });
