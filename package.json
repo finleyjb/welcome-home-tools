@@ -12,7 +12,8 @@
     "build": "pnpm -r --parallel build",
     "check": "pnpm check:ci --write",
     "check:ci": "pnpx @biomejs/biome check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typecheck": "pnpm -r --parallel typecheck"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
