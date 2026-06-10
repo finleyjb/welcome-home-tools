@@ -7,7 +7,7 @@ export default defineConfig({
       formats: ['es', 'iife'],
       name: 'welcomeHome.themeTools',
     },
-    minify: true,
+    minify: 'terser',
   },
   css: {
     modules: {
