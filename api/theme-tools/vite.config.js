@@ -9,6 +9,11 @@ export default defineConfig({
     },
     minify: true,
   },
+  css: {
+    modules: {
+      scopeBehaviour: 'local',
+    },
+  },
   define: {
     'process.env.NODE_ENV': '"production"',
   },

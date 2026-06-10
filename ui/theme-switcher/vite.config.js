@@ -1,6 +1,10 @@
+import preact from '@preact/preset-vite';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { defineConfig } from 'vite';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 export default defineConfig({
+  plugins: [preact(), vanillaExtractPlugin(), cssInjectedByJsPlugin()],
   build: {
     lib: {
       entry: 'index.ts',
@@ -13,5 +17,12 @@ export default defineConfig({
   },
   rolldownOptions: {
     external: ['preact', 'preact-custom-element'],
+    output: {
+      // Provide global variables to use in the UMD build
+      // for externalized deps
+      globals: {
+        vue: 'welcomeHome.themeTools',
+      },
+    },
   },
 });
