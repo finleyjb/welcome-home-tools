@@ -10,7 +10,7 @@ export default defineConfig({
       entry: 'index.ts',
       formats: ['es'],
     },
-    minify: true,
+    minify: 'terser',
   },
   define: {
     'process.env.NODE_ENV': '"production"',
