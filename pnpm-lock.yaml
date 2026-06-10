@@ -242,6 +242,19 @@ importers:
         specifier: ^4.1.8
         version: 4.1.8(@vitest/browser-playwright@4.1.8)(vite@8.0.16(yaml@2.9.0))
 
+  ui/theme-switcher:
+    dependencies:
+      preact:
+        specifier: ^10.29.2
+        version: 10.29.2
+      preact-custom-element:
+        specifier: ^4.6.0
+        version: 4.6.0(preact@10.29.2)
+    devDependencies:
+      vite:
+        specifier: ^8.0.16
+        version: 8.0.16(yaml@2.9.0)
+
 packages:
 
   '@biomejs/biome@2.4.16':
@@ -710,6 +723,14 @@ packages:
   postcss@8.5.15:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
+
+  preact-custom-element@4.6.0:
+    resolution: {integrity: sha512-RhPMuFpEIsbpEwnF+MoRbddzX0y8AdLn1dSpJSbpc6Nx3aSAPXSW9t2xAqQyGfEH1sl/bcsi8Vf0XbvStUy/Ug==}
+    peerDependencies:
+      preact: '>= 10.25.0 || >=11.0.0-0'
+
+  preact@10.29.2:
+    resolution: {integrity: sha512-7tNmwg/7mzzAoB/8kSg6Hl37JraAZw3Z3A0JSY7VXlZwo82Xn0G7wKbNNs2qoF4ZEEsQGTwDAroNdqKs1ofJxQ==}
 
   prettier@3.8.3:
     resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
@@ -1298,6 +1319,12 @@ snapshots:
       nanoid: 3.3.12
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  preact-custom-element@4.6.0(preact@10.29.2):
+    dependencies:
+      preact: 10.29.2
+
+  preact@10.29.2: {}
 
   prettier@3.8.3: {}
 
