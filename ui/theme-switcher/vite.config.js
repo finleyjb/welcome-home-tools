@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Finley J Baker <finleyb.dev@proton.me>
+//
+// SPDX-License-Identifier: MPL-2.0
+
 import preact from '@preact/preset-vite';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { defineConfig } from 'vite';

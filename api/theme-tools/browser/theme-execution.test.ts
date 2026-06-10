@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Finley J Baker <finleyb.dev@proton.me>
+//
+// SPDX-License-Identifier: MPL-2.0
+
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { _listenForThemeChange } from '../src/theme-execution';
 import type { Theme } from '../src/types';

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Finley J Baker <finleyb.dev@proton.me>
+//
+// SPDX-License-Identifier: MPL-2.0
+
 import { atom, computed } from 'nanostores';
 import { parse } from 'valibot';
 import { _chooseDefaultTheme } from './default-theme.ts';

@@ -1,0 +1,25 @@
+{
+  "name": "@welcome-home/themes",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss src/ --dir out --no-map",
+    "build:prod": "postcss src/ --dir dist --env production --no-map"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MPL-2.0",
+  "type": "module",
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "cssnano": "^8.0.1",
+    "postcss": "^8.5.15",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "postcss-preset-env": "^11.3.0"
+  },
+  "browserslist": [
+    "baseline widely available with downstream and not dead"
+  ]
+}

@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "LGPL-3.0-or-later",
+  "license": "MPL-2.0",
   "type": "module",
   "devDependencies": {
     "@vitest/browser-playwright": "^4.1.8",

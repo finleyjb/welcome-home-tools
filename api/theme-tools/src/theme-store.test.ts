@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Finley J Baker <finleyb.dev@proton.me>
+//
+// SPDX-License-Identifier: MPL-2.0
+
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 vi.mock(import('./theme-execution.ts'), () => ({
