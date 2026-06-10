@@ -91,7 +91,7 @@ function validateThemes(
     for (const pathConfig of themes.paths) {
       if (!themeNames.has(pathConfig.path)) {
         throw new ThemeToolsError(
-          `Path ${pathConfig.path} uses theme ${pathConfig.defaultTheme} which does not exist`,
+          `Path ${pathConfig.path} uses theme ${pathConfig.defaultTheme} which is not in themes ${Array.from(themeNames)}`,
         );
       }
     }
