@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["vitest/jsdom"],
     "module": "es2022",
     "target": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ES6"],
