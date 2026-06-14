@@ -7,3 +7,5 @@ packages:
   - "ui/**"
 allowBuilds:
   esbuild: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 525600
